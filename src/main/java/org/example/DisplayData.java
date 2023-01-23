@@ -44,28 +44,30 @@ public class DisplayData {
 
     public static void printData(List<Map> listOfMap) {
         int width = 25;
-        int add = 38;
-        System.out.println("- ".repeat(add));
+        int repeat = 38;
+        lineHorizont(repeat);
         String format = "| %-20s | %-25S | %-7s | %-11s |\n";
         System.out.printf(format,
                 "Card Number",
                 String.format("%" + 8 + "s%s%" + 8 + "s", "","full Name",""),
                 "CVV",
                 "Expire date");
-        System.out.println("- ".repeat(add));
+        lineHorizont(repeat);
         for (Map<String, String> map : listOfMap) {
             String fullName = map.get("firstName") + " " + map.get("lastName");
             int addSpaceL = (width - fullName.length()) / 2;
             int addSpaceR = (width - fullName.length()) / 2;
-            if(addSpaceR + addSpaceL + fullName.length() > width) {
-                addSpaceR = addSpaceR - 1;
-            }
+            addSpaceR = (addSpaceR + addSpaceL + fullName.length() > width) ? addSpaceR - 1 : addSpaceR;
             System.out.printf(format,
                     map.get("cardNumber"),
                     String.format("%" + addSpaceL + "s%s%" + addSpaceR + "s", "",fullName,""),
                     map.get("cvv"),
                     map.get("expDate"));
         }
-        System.out.println("- ".repeat(add));
+        lineHorizont(repeat);;
+    }
+
+    private static void lineHorizont(int repeat) {
+        System.out.println("- ".repeat(repeat));
     }
 }
