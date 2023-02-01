@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 
 public class DisplayData {
-
     public static List<Map> parseData(CardStorage cardStorage) {
         List listOfMap = new ArrayList<>();
         for (CardString line: cardStorage) {
@@ -43,16 +42,19 @@ public class DisplayData {
     }
 
     public static void printData(List<Map> listOfMap) {
-        int width = 25;
-        int repeat = 38;
+        int width = 30;
+        int repeat = (52 + width)/2;
+        int spaceFullName = (width - "full name".length()) /  2;
+
         lineHorizont(repeat);
-        String format = "| %-20s | %-25S | %-7s | %-11s |\n";
+        String format = "| %-20s | %-"+ width +"S | %-7s | %-11s |\n";
         System.out.printf(format,
                 "Card Number",
-                String.format("%" + 8 + "s%s%" + 8 + "s", "","full Name",""),
+                String.format("%" + spaceFullName + "s%s%" + spaceFullName + "s", "","full Name",""),
                 "CVV",
                 "Expire date");
         lineHorizont(repeat);
+
         for (Map<String, String> map : listOfMap) {
             String fullName = map.get("firstName") + " " + map.get("lastName");
             int addSpaceL = (width - fullName.length()) / 2;
@@ -64,6 +66,7 @@ public class DisplayData {
                     map.get("cvv"),
                     map.get("expDate"));
         }
+
         lineHorizont(repeat);;
     }
 

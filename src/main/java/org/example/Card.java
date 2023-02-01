@@ -42,7 +42,7 @@ class CardString implements Serializable{
 @ToString
 @Setter
 @Getter
-class CardStorage implements Iterable<CardString>{
+class CardStorage implements Iterable<CardString>, Serializable{
     private List<CardString> storage;
     public CardStorage() {
         storage = new ArrayList<>();
